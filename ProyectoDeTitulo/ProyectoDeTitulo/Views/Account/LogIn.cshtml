@@ -1,0 +1,47 @@
+﻿@model ProyectoDeTitulo.Models.LoginViewModel
+@{
+    ViewBag.Title = "Iniciar Sesión";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <!-- /.login-logo -->
+    <div class="form-horizontal">
+        <p class="login-box-msg">@ViewBag.Title</p>
+        @using (Html.BeginForm("LogIn", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            if (!Html.ViewData.ModelState.IsValid)
+            {
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">&times;</button>
+                    <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                    @Html.ValidationSummary(false, "", new { @class = "" })
+                </div>
+            }
+            <div class="form-group">
+                <input type="text" autocomplete="off" name="Usuario" class="form-control" placeholder="Usuario" required>
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div class="form-group">
+                <input type="password"
+                       name="Password"
+                       class="form-control"
+                       placeholder="Contraseña"
+                       minlength="4"
+                       required>
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="form-group">
+                <!-- /.col -->
+                <div class="col-xs-offset-6 col-xs-6">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">Ingresar</button>
+                </div>
+                <!-- /.col -->
+            </div>
+
+        }
+    </div>
+    <div class="text-right">
+        <b>Versión</b> @*@ViewContext.Controller.GetType().Assembly.GetName().Version*@
+    </div>
+

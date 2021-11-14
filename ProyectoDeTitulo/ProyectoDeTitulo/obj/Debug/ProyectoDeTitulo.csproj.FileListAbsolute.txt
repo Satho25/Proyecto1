@@ -101,3 +101,6 @@ C:\Users\victor\Documents\GitHub\Proyecto1\ProyectoDeTitulo\ProyectoDeTitulo\obj
 C:\Users\victor\Documents\GitHub\Proyecto1\ProyectoDeTitulo\ProyectoDeTitulo\obj\Debug\ProyectoDeTitulo.csproj.CopyComplete
 C:\Users\victor\Documents\GitHub\Proyecto1\ProyectoDeTitulo\ProyectoDeTitulo\obj\Debug\ProyectoDeTitulo.dll
 C:\Users\victor\Documents\GitHub\Proyecto1\ProyectoDeTitulo\ProyectoDeTitulo\obj\Debug\ProyectoDeTitulo.pdb
+C:\Users\victor\Documents\GitHub\Proyecto1\ProyectoDeTitulo\ProyectoDeTitulo\obj\Debug\ProyectoDeTitulo.csprojAssemblyReference.cache
+C:\Users\victor\Documents\GitHub\Proyecto1\ProyectoDeTitulo\ProyectoDeTitulo\obj\Debug\ProyectoDeTitulo.Migrations.InitialCreate.resources
+C:\Users\victor\Documents\GitHub\Proyecto1\ProyectoDeTitulo\ProyectoDeTitulo\obj\Debug\ProyectoDeTitulo.csproj.GenerateResource.cache

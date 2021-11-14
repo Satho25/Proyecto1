@@ -16,7 +16,7 @@ namespace ProyectoDeTitulo.Controllers
         // GET: Base
         public ActionResult Index()
         {
-            testIni();
+            //testIni();
 
             if (!User.Identity.IsAuthenticated)
                 return RedirectToAction("LogIn", "Account");
@@ -50,7 +50,7 @@ namespace ProyectoDeTitulo.Controllers
 
 
 
-        string connectionString = "server=127.0.0.1;port=3306;database=proyectodetitulo3;uid=root;Pwd=1234";
+        string connectionString = "server=127.0.0.1;port=3306;database=proyectodetitulo4;uid=root;Pwd=1234";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {

@@ -3,45 +3,56 @@
     ViewBag.Title = "Iniciar Sesión";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-5">
+            <div class="card shadow-lg border-0 rounded-lg mt-5">
+                <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
+                <div class="card-body">
 
-    <!-- /.login-logo -->
-    <div class="form-horizontal">
-        <p class="login-box-msg">@ViewBag.Title</p>
-        @using (Html.BeginForm("LogIn", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-            if (!Html.ViewData.ModelState.IsValid)
-            {
-                <div class="alert alert-danger alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="close">&times;</button>
-                    <h4><i class="icon fa fa-ban"></i> Error!</h4>
-                    @Html.ValidationSummary(false, "", new { @class = "" })
+                    @using (Html.BeginForm("LogIn", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        if (!Html.ViewData.ModelState.IsValid)
+                        {
+                            <div class="form-floating mb-3">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="close">&times;</button>
+                                <h4><i class="icon fa fa-ban"></i> Error!</h4>
+                                @Html.ValidationSummary(false, "", new { @class = "" })
+                            </div>
+                        }
+
+                            <div class="form-floating mb-3">
+                                <input type="text" autocomplete="off" name="Usuario" id="Usuario" class="form-control" placeholder="Usuario" required>
+                                @*<input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />*@
+                                <label for="Usuario">Email address</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password"
+                                       name="Password"
+                                       id="Password"
+                                       class="form-control"
+                                       placeholder="Contraseña"
+                                       minlength="4"
+                                       required>
+                                <label for="Password">Password</label>
+                            </div>
+                            @*<div class="form-check mb-3">
+                                <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
+                                <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
+                            </div>*@
+                            <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+                                <a class="small" href="password.html">Forgot Password?</a>
+                                @*<a class="btn btn-primary" href="index.html">Login</a>*@
+                                <button type="submit" class="btn btn-primary btn-block btn-flat">Ingresar</button>
+                            </div>
+                    }
                 </div>
-            }
-            <div class="form-group">
-                <input type="text" autocomplete="off" name="Usuario" class="form-control" placeholder="Usuario" required>
-                <span class="glyphicon glyphicon-user form-control-feedback"></span>
-            </div>
-            <div class="form-group">
-                <input type="password"
-                       name="Password"
-                       class="form-control"
-                       placeholder="Contraseña"
-                       minlength="4"
-                       required>
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-            </div>
-            <div class="form-group">
-                <!-- /.col -->
-                <div class="col-xs-offset-6 col-xs-6">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Ingresar</button>
+                <div class="card-footer text-center py-3">
+                    <div class="small"><a href="register.html">Need an account? Sign up!</a></div>
                 </div>
-                <!-- /.col -->
             </div>
-
-        }
+        </div>
     </div>
-    <div class="text-right">
-        <b>Versión</b> @*@ViewContext.Controller.GetType().Assembly.GetName().Version*@
-    </div>
-
+</div>

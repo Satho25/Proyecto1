@@ -19,16 +19,24 @@ namespace ProyectoDeTitulo
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+            bundles.Add(new Bundle("~/bundles/bootstrap").Include("~/Scripts/bootstrap.bundle.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/scripts").Include(
-                      "~/Scripts/scripts.js"));
-
+                    "~/Scripts/bootbox.min.js",
+                    "~/Scripts/bootstrap-notify.js",
+                    "~/Scripts/bootstrap-toggle.js",
+                    "~/Scripts/datatables.min.js",
+                    "~/Scripts/respond.js",
+                    "~/Scripts/scripts.js"));
+            
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      //"~/Content/bootstrap.css",
+                      "~/Content/bootstrap.min.css",
                       "~/Content/styles.css"));
-            //"~/Content/site.css"));
+
+
+            bundles.Add(new ScriptBundle("~/bundles/app").Include(
+                      "~/Scripts/app/app.js",
+                      "~/Scripts/app/User.js"));
         }
     }
 }

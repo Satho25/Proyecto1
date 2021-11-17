@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using MySql.Data.MySqlClient;
@@ -17,12 +18,6 @@ namespace ProyectoDeTitulo.DL
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                // Create database if not exists
-                using (DataContext contextDB = new DataContext(connection, false))
-                {
-                    contextDB.Database.CreateIfNotExists();
-                }
-
                 connection.Open();
                 MySqlTransaction transaction = connection.BeginTransaction();
 
@@ -55,6 +50,47 @@ namespace ProyectoDeTitulo.DL
                 return true;
             }            
         }
+        public static bool ActualizarUsuario(Usuario _usuario)
+        {
+            //string connectionString = "server=127.0.0.1;port=3306;database=proyectodetitulo4;uid=root;Pwd=1234";
+            string connectionString = ConfigurationManager.ConnectionStrings["MyContextDB"].ToString(); 
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                using (DataContext context = new DataContext(connection, false))
+                {
+                    context.Database.ExecuteSqlCommand("UPDATE Usuarios SET " +
+                        "Nombre = {0}," +
+                        "Apellido = {1}," +
+                        "Correo = {2}," +
+                        "Contraseña = {3}," +
+                        "EstadoID = {4}," +
+                        "PerfilID = {5}" +
+                        " WHERE RUT = {6}", 
+                        _usuario.Nombre,_usuario.Apellido,_usuario.Correo, _usuario.Contraseña, _usuario.EstadoID, _usuario.PerfilID,_usuario.RUT);
+                }
+                
+                return true;
+            }            
+        }
+        public static bool EliminarUsuario(string key)
+        {
+            //string connectionString = "server=127.0.0.1;port=3306;database=proyectodetitulo4;uid=root;Pwd=1234";
+            string connectionString = ConfigurationManager.ConnectionStrings["MyContextDB"].ToString(); 
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                using (DataContext context = new DataContext(connection, false))
+                {
+                    context.Database.ExecuteSqlCommand("DELETE FROM Usuarios WHERE RUT = {0}", key);
+                }
+                
+                return true;
+            }            
+        }
+
         public static Usuario GetUsuario(string key)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["MyContextDB"].ToString();
@@ -62,39 +98,11 @@ namespace ProyectoDeTitulo.DL
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                // Create database if not exists
-                using (DataContext contextDB = new DataContext(connection, false))
-                {
-                    contextDB.Database.CreateIfNotExists();
-                }
-
                 connection.Open();
-                //MySqlTransaction transaction = connection.BeginTransaction();
-
-                try
-                {
-                    // DbConnection that is already opened
-                    using (DataContext context = new DataContext(connection,false))
-                    {
-
-                        // Interception/SQL logging
-                        context.Database.Log = (string message) => { Console.WriteLine(message); };
-
-                        // Passing an existing transaction to the context
-                        //context.Database.UseTransaction(transaction);
-
-                        usuario = context.Usuarios.First(x => x.RUT == key);
-                        //context.SaveChanges();
-
-                        //context.Usuario.AddRange(Usuario);
-                    }
-
-                    //transaction.Commit();
-                }
-                catch
-                {
-                    //transaction.Rollback();
-                    throw;
+                // DbConnection that is already opened
+                using (DataContext context = new DataContext(connection,true))
+                {                    
+                    usuario = context.Usuarios.Where(x => x.RUT == key).Include(x => x.Perfil).Include(x => x.Estado).FirstOrDefault();
                 }
 
                 return usuario;
@@ -103,44 +111,19 @@ namespace ProyectoDeTitulo.DL
         public static IEnumerable<Usuario> GetUsuarioList()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["MyContextDB"].ToString();
-            IEnumerable<Usuario> listUsuarios = new List<Usuario>();
-
+            List<Usuario> listUsuarios = new List<Usuario>();
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                // Create database if not exists
-                using (DataContext contextDB = new DataContext(connection, false))
-                {
-                    contextDB.Database.CreateIfNotExists();
-                }
-
                 connection.Open();
-                //MySqlTransaction transaction = connection.BeginTransaction();
-
-                try
+                // DbConnection that is already opened
+                using (DataContext context = new DataContext(connection, true))
                 {
-                    // DbConnection that is already opened
-                    using (DataContext context = new DataContext(connection,false))
-                    {
-
-                        // Interception/SQL logging
-                        context.Database.Log = (string message) => { Console.WriteLine(message); };
-
-                        // Passing an existing transaction to the context
-                        //context.Database.UseTransaction(transaction);
-                        
-                        listUsuarios = context.Usuarios.AsEnumerable();
-                    }
-
-                    //transaction.Commit();
-                }
-                catch
-                {
-                    //transaction.Rollback();
-                    throw;
+                    //listUsuarios = context.Usuarios.Include("Perfil.Estado").ToList();
+                    listUsuarios = context.Usuarios.Include(x => x.Perfil).Include(x => x.Estado).ToList();
                 }
 
-                return listUsuarios;
-            }            
+                return listUsuarios.AsEnumerable();
+            }
         }
         public static IEnumerable<Permisos> GetPermisos()
         {

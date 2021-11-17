@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ProyectoDeTitulo.DBModels.Usuario>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <button type="button" id="btnUsuarioCrearNuevo" class="btn btn-primary btn-flat">Crear nuevo</button>
 </p>
 <table class="table">
     <tr>
@@ -29,35 +29,78 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.RUT)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Apellido)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Correo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Contraseña)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EstadoID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PerfilID)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RUT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Correo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Contraseña)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Perfil.Nombre)
+            </td>
+            <td>
+                <a href="#" class="usr-edit-link" data-id="@item.RUT"><i class="fas fa-edit"></i></a>
+                <a href="#" class="usr-delete-link" data-id="@item.RUT"><i class="fa fa-trash" aria-hidden="true"></i></a>
+            </td>
+        </tr>
+    }
 
 </table>
+
+<!--Modal Mantenedor usuarios-->
+<div id="modalCreateUsuario" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    Crear/Actualizar
+                </h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" id="divRenderCreateUsuario">
+            </div>
+            <div class="modal-footer">
+                <div class="col-lg-10 text-right">
+                    <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modalEditUsuario" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    Crear/Actualizar
+                </h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" id="divRenderEditUsuario">
+            </div>
+            <div class="modal-footer">
+                <div class="col-lg-10 text-right">
+                    <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

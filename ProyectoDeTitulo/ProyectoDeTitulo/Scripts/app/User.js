@@ -2,7 +2,7 @@
 (function ($, window, document) {
     $(function () {
 
-        $(document).on("click", "#btnUsuarioCrearNuevo", function () {
+       /* $(document).on("click", "#btnUsuarioCrearNuevo", function () {
             //llamado de ajax
             if ($.active == 0) { //Validamos que no exista otra petición activa
                 $.ajax({
@@ -73,7 +73,7 @@
                     }
                 });
             }
-        });
+        });*/
         $(document).on("click", ".usr-delete-link", function () {
             var key = $(this).data("id");
             //llamado de ajax

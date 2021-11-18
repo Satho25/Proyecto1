@@ -1,7 +1,24 @@
 ﻿@model IEnumerable<ProyectoDeTitulo.DBModels.Usuario>
+@{
+    if (!string.IsNullOrEmpty(ViewBag.NotificationErr))
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Alerta</strong>@ViewBag.NotificationErr.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    if (!string.IsNullOrEmpty(ViewBag.Notification))
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @ViewBag.Notification
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+}
 
 <p>
-    <button type="button" id="btnUsuarioCrearNuevo" class="btn btn-primary btn-flat">Crear nuevo</button>
+    @*<button type="button" id="btnUsuarioCrearNuevo" class="btn btn-primary btn-flat">Crear nuevo</button>*@
+    <a href="/User/Create" class="link-success">Crear nuevo</a>
 </p>
 <table class="table">
     <tr>
@@ -54,7 +71,7 @@
                 @Html.DisplayFor(modelItem => item.Perfil.Nombre)
             </td>
             <td>
-                <a href="#" class="usr-edit-link" data-id="@item.RUT"><i class="fas fa-edit"></i></a>
+                <a href="@("/User/Edit?key=" + @item.RUT)" class="usr-edit-link" data-id="@item.RUT"><i class="fas fa-edit"></i></a>
                 <a href="#" class="usr-delete-link" data-id="@item.RUT"><i class="fa fa-trash" aria-hidden="true"></i></a>
             </td>
         </tr>

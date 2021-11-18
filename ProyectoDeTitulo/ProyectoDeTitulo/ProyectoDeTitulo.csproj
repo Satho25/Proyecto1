@@ -211,9 +211,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202111111528301_InitialCreate.cs" />
-    <Compile Include="Migrations\202111111528301_InitialCreate.designer.cs">
-      <DependentUpon>202111111528301_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\202111172123302_Initial.cs" />
+    <Compile Include="Migrations\202111172123302_Initial.designer.cs">
+      <DependentUpon>202111172123302_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CustomSerializeModel.cs" />
@@ -342,8 +342,8 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202111111528301_InitialCreate.resx">
-      <DependentUpon>202111111528301_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202111172123302_Initial.resx">
+      <DependentUpon>202111172123302_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

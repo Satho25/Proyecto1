@@ -33,10 +33,14 @@ namespace ProyectoDeTitulo.DL
                         // Passing an existing transaction to the context
                         context.Database.UseTransaction(transaction);
 
+                        foreach(int _id in _Perfil.PermisosID)
+                        {
+                            if(context.Permisos.FirstOrDefault(x => x.ID == _id) != null)
+                                _Perfil.Permisos.Add(context.Permisos.First(x => x.ID == _id));
+                        }
+
                         context.Perfils.Add(_Perfil);
                         context.SaveChanges();
-
-                        //context.Perfil.AddRange(Perfil);
                     }
 
                     transaction.Commit();
@@ -60,12 +64,29 @@ namespace ProyectoDeTitulo.DL
                 connection.Open();
                 using (DataContext context = new DataContext(connection, false))
                 {
-                    context.Database.ExecuteSqlCommand("UPDATE Perfils SET " +
-                        "Nombre = {0}," +
-                        "EstadoID = {1}," +
-                        "PermisoID = {2}" +
-                        " WHERE ID = {3}",
-                        _Perfil.Nombre, _Perfil.EstadoID, _Perfil.PermisoID, _Perfil.ID);
+                    //ACTUALIZA REGISTROS tabla perfils
+                    context.Database.ExecuteSqlCommand("UPDATE Perfil SET " +
+                      "Nombre = {0}," +
+                      "EstadoID = {1}" +
+                      " WHERE ID = {2}",
+                      _Perfil.Nombre, _Perfil.EstadoID, _Perfil.ID);
+
+                    //Elimina registros tabla permisosperfils (M a M)
+                    context.Database.ExecuteSqlCommand("DELETE FROM permisosperfils WHERE Perfil_ID = {0}", _Perfil.ID);
+
+                    //LLENA TABLA permisosperfils
+                    var _upd = context.Perfils.SingleOrDefault(x => x.ID == _Perfil.ID);
+
+                    if(_upd != null)
+                    {
+                        foreach (int _id in _Perfil.PermisosID)
+                        {
+                            if (context.Permisos.FirstOrDefault(x => x.ID == _id) != null)
+                                _upd.Permisos.Add(context.Permisos.First(x => x.ID == _id));
+                        }
+
+                        context.SaveChanges();
+                    }
                 }
 
                 return true;
@@ -81,7 +102,7 @@ namespace ProyectoDeTitulo.DL
                 connection.Open();
                 using (DataContext context = new DataContext(connection, false))
                 {
-                    context.Database.ExecuteSqlCommand("DELETE FROM Perfils WHERE ID = {0}", key);
+                    context.Database.ExecuteSqlCommand("DELETE FROM Perfil WHERE ID = {0}", key);
                 }
 
                 return true;
@@ -113,10 +134,10 @@ namespace ProyectoDeTitulo.DL
             {
                 connection.Open();
                 // DbConnection that is already opened
-                using (DataContext context = new DataContext(connection, true)) { 
+                using (DataContext context = new DataContext(connection, true)) {
 
-                    //listPerfils = context.Perfils.Include(x => x.Permisos).Include(x => x.Estado).ToList();
-                    listPerfils = context.Perfils.ToList();
+                    listPerfils = context.Perfils.Include(x => x.Permisos).Include(x => x.Estado).ToList();
+                    //listPerfils = context.Perfils.ToList();
                 }
 
                 return listPerfils.AsEnumerable();

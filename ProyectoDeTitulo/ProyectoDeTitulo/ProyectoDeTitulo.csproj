@@ -180,6 +180,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\EstadoController.cs" />
     <Compile Include="Controllers\Extensions\ControllerExtensions.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -211,9 +212,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202111172123302_Initial.cs" />
-    <Compile Include="Migrations\202111172123302_Initial.designer.cs">
-      <DependentUpon>202111172123302_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\202111191930305_initial.cs" />
+    <Compile Include="Migrations\202111191930305_initial.designer.cs">
+      <DependentUpon>202111191930305_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CustomSerializeModel.cs" />
@@ -242,6 +243,8 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\app\app.js" />
+    <Content Include="Scripts\app\Estado.js" />
+    <Content Include="Scripts\app\Perfil.js" />
     <Content Include="Scripts\app\User.js" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -310,7 +313,7 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Error\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
@@ -328,6 +331,7 @@
     <Content Include="Views\Perfil\Partial\_edit.cshtml" />
     <Content Include="Views\Estado\index.cshtml" />
     <Content Include="Views\Estado\Partial\_create.cshtml" />
+    <Content Include="Views\Perfil\Partial\_detail.cshtml" />
     <Content Include="Views\Estado\Partial\_edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -342,8 +346,8 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202111172123302_Initial.resx">
-      <DependentUpon>202111172123302_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202111191930305_initial.resx">
+      <DependentUpon>202111191930305_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

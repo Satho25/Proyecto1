@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ProyectoDeTitulo.DBModels.Permisos>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a href="/Permiso/Create" class="link-success">Crear nuevo</a>
 </p>
 <table class="table">
     <tr>
@@ -20,12 +20,11 @@
             @Html.DisplayFor(modelItem => item.Nombre)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EstadoID)
+            @Html.DisplayFor(modelItem => item.Estado.Nombre)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            <a href="@("/Permiso/Edit?key=" + @item.ID)"><i class="fas fa-edit"></i></a>
+            <a href="#" class="perf-delete-link" data-id="@item.ID"><i class="fa fa-trash" aria-hidden="true"></i></a>
         </td>
     </tr>
 }

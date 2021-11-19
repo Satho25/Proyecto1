@@ -1,9 +1,9 @@
 ﻿@model ProyectoDeTitulo.DBModels.Estado
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("CreateEstado", "Estado", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Estado</h4>
         <hr />

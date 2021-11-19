@@ -36,6 +36,8 @@ namespace ProyectoDeTitulo
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                       "~/Scripts/app/app.js",
+                      "~/Scripts/app/Perfil.js",
+                      "~/Scripts/app/Estado.js",
                       "~/Scripts/app/User.js"));
         }
     }

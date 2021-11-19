@@ -1,23 +1,5 @@
 ﻿@model IEnumerable<ProyectoDeTitulo.DBModels.Usuario>
-@{
-    if (!string.IsNullOrEmpty(ViewBag.NotificationErr))
-    {
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>Alerta</strong>@ViewBag.NotificationErr.
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    }
-    if (!string.IsNullOrEmpty(ViewBag.Notification))
-    {
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            @ViewBag.Notification
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    }
-}
-
 <p>
-    @*<button type="button" id="btnUsuarioCrearNuevo" class="btn btn-primary btn-flat">Crear nuevo</button>*@
     <a href="/User/Create" class="link-success">Crear nuevo</a>
 </p>
 <table class="table">
@@ -79,45 +61,6 @@
 
 </table>
 
-<!--Modal Mantenedor usuarios-->
-<div id="modalCreateUsuario" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">
-                    Crear/Actualizar
-                </h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body" id="divRenderCreateUsuario">
-            </div>
-            <div class="modal-footer">
-                <div class="col-lg-10 text-right">
-                    <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="modalEditUsuario" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">
-                    Crear/Actualizar
-                </h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body" id="divRenderEditUsuario">
-            </div>
-            <div class="modal-footer">
-                <div class="col-lg-10 text-right">
-                    <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
+
 

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ProyectoDeTitulo.DBModels.Estado>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a href="/Estado/Create" class="link-success">Crear nuevo</a>
 </p>
 <table class="table">
     <tr>
@@ -17,9 +17,8 @@
             @Html.DisplayFor(modelItem => item.Nombre)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            <a href="@("/Estado/Edit?key=" + @item.ID)"><i class="fas fa-edit"></i></a>
+            <a href="#" class="est-delete-link" data-id="@item.ID"><i class="fa fa-trash" aria-hidden="true"></i></a>
         </td>
     </tr>
 }

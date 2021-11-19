@@ -1,4 +1,12 @@
-﻿@model ProyectoDeTitulo.DBModels.Usuario
+﻿@using ProyectoDeTitulo.DL;
+@using ProyectoDeTitulo.DBModels;
+
+@model ProyectoDeTitulo.DBModels.Usuario
+@{
+
+    IEnumerable<Estado> listEstado = ProyectoDeTitulo.DL.EstadoDL.GetEstadoList();
+    IEnumerable<Perfil> listPerfil = ProyectoDeTitulo.DL.PerfilDL.GetPerfilList();
+}
 
 @using (Html.BeginForm("UpdateUser", "User", FormMethod.Post))
 {
@@ -45,7 +53,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Contraseña, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Contraseña, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Contraseña, new { htmlAttributes = new { @class = "form-control" , placeholder = "Password"} })
                 @Html.ValidationMessageFor(model => model.Contraseña, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -53,7 +61,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.EstadoID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EstadoID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("EstadoID", new SelectList(listEstado.ToList(), "ID", "Nombre"), "Seleccione Estado", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.EstadoID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -61,7 +69,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.PerfilID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.PerfilID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("PerfilID", new SelectList(listPerfil.ToList(), "ID", "Nombre"), "Seleccione Perfil", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.PerfilID, "", new { @class = "text-danger" })
             </div>
         </div>

@@ -1,9 +1,14 @@
-﻿@model ProyectoDeTitulo.DBModels.Permisos
+﻿@using ProyectoDeTitulo.DL;
+@using ProyectoDeTitulo.DBModels;
+@model ProyectoDeTitulo.DBModels.Permisos
+@{
+    IEnumerable<Estado> listEstado = ProyectoDeTitulo.DL.EstadoDL.GetEstadoList();
+}
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("UpdatePermisos", "Permiso", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Permisos</h4>
         <hr />
@@ -21,7 +26,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.EstadoID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EstadoID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("EstadoID", new SelectList(listEstado.ToList(), "ID", "Nombre"), "Seleccione Estado", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.EstadoID, "", new { @class = "text-danger" })
             </div>
         </div>

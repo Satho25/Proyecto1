@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using MySql.Data.MySqlClient;
@@ -61,7 +62,7 @@ namespace ProyectoDeTitulo.DL
                 {
                     context.Database.ExecuteSqlCommand("UPDATE Permisos SET " +
                         "Nombre = {0}," +
-                        "EstadoID = {1}," +
+                        "EstadoID = {1}" +
                         " WHERE ID = {2}",
                         _Permisos.Nombre, _Permisos.EstadoID, _Permisos.ID);
                 }
@@ -115,11 +116,29 @@ namespace ProyectoDeTitulo.DL
                 {
 
                     //listPermisoss = context.Permisoss.Include(x => x.Permisoss).Include(x => x.Estado).ToList();
-                    listPermisoss = context.Permisos.ToList();
+                    listPermisoss = context.Permisos.Include(x => x.Estado).ToList();
                 }
 
                 return listPermisoss.AsEnumerable();
             }
+        }
+        public static IEnumerable<Permisos> GetPermisosByPerfilList(int id)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["MyContextDB"].ToString();
+            List<Permisos> listPermisoss = new List<Permisos>();
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                // DbConnection that is already opened
+                using (DataContext context = new DataContext(connection, true))
+                {
+                    //context.Configuration.LazyLoadingEnabled = false;
+
+                    listPermisoss = context.Perfils.Include(x => x.Permisos).First(x => x.ID == id).Permisos.ToList();
+                }
+
+            }
+            return listPermisoss;
         }
     }
 }

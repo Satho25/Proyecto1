@@ -60,7 +60,21 @@ namespace ProyectoDeTitulo.DL
                 connection.Open();
                 using (DataContext context = new DataContext(connection, false))
                 {
-                    context.Database.ExecuteSqlCommand("UPDATE Usuarios SET " +
+                    /* -> por alguna razon actualiza todos los registros !! error 
+                    var _upd = context.Usuarios.SingleOrDefault(x => x.ID == _usuario.ID);
+
+                    if(_upd != null)
+                    {
+                        _upd.Nombre = _usuario.Nombre;
+                        _upd.Apellido = _usuario.Apellido;
+                        _upd.Correo = _usuario.Correo;
+                        _upd.Contraseña = _usuario.Contraseña;
+                        _upd.EstadoID = _usuario.EstadoID;
+                        _upd.PerfilID = _usuario.PerfilID;
+                        context.SaveChanges();
+                    } */
+
+                    context.Database.ExecuteSqlCommand("UPDATE Usuario SET " +
                         "Nombre = {0}," +
                         "Apellido = {1}," +
                         "Correo = {2}," +
@@ -69,8 +83,9 @@ namespace ProyectoDeTitulo.DL
                         "PerfilID = {5}" +
                         " WHERE RUT = {6}", 
                         _usuario.Nombre,_usuario.Apellido,_usuario.Correo, _usuario.Contraseña, _usuario.EstadoID, _usuario.PerfilID,_usuario.RUT);
+                       
                 }
-                
+
                 return true;
             }            
         }
@@ -84,7 +99,7 @@ namespace ProyectoDeTitulo.DL
                 connection.Open();
                 using (DataContext context = new DataContext(connection, false))
                 {
-                    context.Database.ExecuteSqlCommand("DELETE FROM Usuarios WHERE RUT = {0}", key);
+                    context.Database.ExecuteSqlCommand("DELETE FROM Usuario WHERE RUT = {0}", key);
                 }
                 
                 return true;

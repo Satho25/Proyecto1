@@ -1,45 +1,57 @@
-﻿@model ProyectoDeTitulo.DBModels.Perfil
+﻿@using ProyectoDeTitulo.DL;
+@using ProyectoDeTitulo.DBModels;
+@model ProyectoDeTitulo.DBModels.Perfil
+@{
+    IEnumerable<Estado> listEstado = ProyectoDeTitulo.DL.EstadoDL.GetEstadoList();
+    IEnumerable<Permisos> listPermisos = ProyectoDeTitulo.DL.PermisoDL.GetPermisosList();
+}
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("UpdatePerfil", "Perfil", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Perfil</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
-            </div>
-        </div>
+<div class="form-horizontal">
+    <h4>Perfil</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ID)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.EstadoID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EstadoID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EstadoID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PermisoID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PermisoID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PermisoID, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
         </div>
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.EstadoID, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("EstadoID", new SelectList(listEstado.ToList(), "ID", "Nombre"), "Seleccione Estado", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.EstadoID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PermisosID, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @foreach (Permisos per in listPermisos)
+            {
+                var obj = Model.Permisos != null ? Model.Permisos.FirstOrDefault(x => x.ID == per.ID) : null;
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" name="PermisosID" @(obj != null ? "Checked" : "") value="@per.ID" id=@("per_" + per.ID) />
+                    <label class="form-check-label" for=@("per_" + per.ID)>@per.Nombre</label>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
 }
 
 <div>

@@ -31,10 +31,10 @@ namespace ProyectoDeTitulo
                 switch (((HttpException)ex).GetHttpCode())
                 {
                     case 404:
-                        Response.Redirect("/Error/Oops/404");
+                        Response.Redirect("/Error");
                         break;
                     case 500:
-                        Response.Redirect("/Error/Oops/?id=500&msg=" + ex.Message);
+                        Response.Redirect("/Error/Error500?err=" + ex.Message);
                         break;
                 }
             }

@@ -29,7 +29,7 @@ namespace ProyectoDeTitulo.Controllers
             if (ModelState.IsValid)
             {
                 //Crea base de datos si es que no existe
-                DL.GenericDL.CheckDB();
+                //DL.GenericDL.CheckDB();
 
                 if (Membership.ValidateUser(loginView.Usuario, loginView.Password))
                 {

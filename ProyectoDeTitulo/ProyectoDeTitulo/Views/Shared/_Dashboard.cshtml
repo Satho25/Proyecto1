@@ -95,16 +95,30 @@
                     </ol>
                     <div class="card mb-4">
                         <div class="card-body">
+                            @if (!string.IsNullOrEmpty(ViewBag.NotificationErr))
+                            {
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <strong>Alerta</strong> @ViewBag.NotificationErr.
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(ViewBag.Notification))
+                            {
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    @ViewBag.Notification
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            }
 
                             @RenderBody()
 
                             @*<p class="mb-0">
-                                    This page is an example of using static navigation. By removing the
-                                    <code>.sb-nav-fixed</code>
-                                    class from the
-                                    <code>body</code>
-                                    , the top navigation and side navigation will become static on scroll. Scroll down this page to see an example.
-                                </p>*@
+                                This page is an example of using static navigation. By removing the
+                                <code>.sb-nav-fixed</code>
+                                class from the
+                                <code>body</code>
+                                , the top navigation and side navigation will become static on scroll. Scroll down this page to see an example.
+                            </p>*@
                         </div>
                     </div>
                     <div style="height: 100vh"></div>
@@ -133,45 +147,3 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
-
-@*<div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div id="header_container">
-        <div id="header">
-            <i>=(^.^)= @ViewBag.Title</i>
-            <span style="float:right; font-size:small">
-                @if (HttpContext.Current.User.Identity.IsAuthenticated)
-                {
-                    var identity = ((CustomPrincipal)HttpContext.Current.User);
-                    @Html.Label(string.Format("Welcome {0}", identity.Username))
-                    @Html.ActionLink("Log out", "LogOut", "Account")
-                }
-            </span>
-        </div>
-    </div>
-
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>*@
-

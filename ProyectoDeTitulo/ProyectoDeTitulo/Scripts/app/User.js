@@ -107,7 +107,8 @@
                                                 app.error(data.responseText);
                                             }
                                             return;
-                                        }                                        
+                                        }
+                                        window.location.href = document.location.origin + "/User";
                                     },
                                     error: function (jqXHR, exception) {
                                         app.ajaxError(jqXHR, exception);

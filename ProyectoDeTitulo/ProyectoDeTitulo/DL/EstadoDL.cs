@@ -60,7 +60,7 @@ namespace ProyectoDeTitulo.DL
                 connection.Open();
                 using (DataContext context = new DataContext(connection, false))
                 {
-                    context.Database.ExecuteSqlCommand("UPDATE Estadoes SET " +
+                    context.Database.ExecuteSqlCommand("UPDATE Estado SET " +
                         "Nombre = {0}" +
                         " WHERE ID = {1}",
                         _Estado.Nombre, _Estado.ID);
@@ -79,7 +79,7 @@ namespace ProyectoDeTitulo.DL
                 connection.Open();
                 using (DataContext context = new DataContext(connection, false))
                 {
-                    context.Database.ExecuteSqlCommand("DELETE FROM Estados WHERE ID = {0}", key);
+                    context.Database.ExecuteSqlCommand("DELETE FROM Estado WHERE ID = {0}", key);
                 }
 
                 return true;

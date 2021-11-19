@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<ProyectoDeTitulo.DBModels.Perfil>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a href="/Perfil/Create" class="link-success">Crear nuevo</a>
 </p>
 <table class="table">
     <tr>
@@ -11,29 +11,44 @@
         <th>
             @Html.DisplayNameFor(model => model.EstadoID)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PermisoID)
-        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EstadoID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PermisoID)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado.Nombre)
+            </td>
+            <td>
+                <a href="@("/Perfil/Edit?key=" + @item.ID)"><i class="fas fa-edit"></i></a>
+                <a href="#" class="perf-delete-link" data-id="@item.ID"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                <a href="#" class="perf-detail-link" data-id="@item.ID"><i class="fas fa-info-circle"></i></a>
+            </td>
+        </tr>
+    }
 
 </table>
+
+<!--Modal detalle-->
+<div id="modalPerfilDetails" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    Permisos de perfil
+                </h4>
+                @*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
+            </div>
+            <div class="modal-body" id="divRenderPerfilDetails">
+
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>

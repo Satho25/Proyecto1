@@ -51,6 +51,7 @@ namespace ProyectoDeTitulo.Controllers
         [HttpPost]
         public ActionResult CreateUser(Usuario usuario)
         {
+            ViewBag.Title = "Mantenedor Usuario";
             try
             {
                 //Validaciones y preparacion
@@ -107,21 +108,18 @@ namespace ProyectoDeTitulo.Controllers
                 if (!string.IsNullOrEmpty(key))
                 {
                     DL.UserDL.EliminarUsuario(key);
-                }                    
+                }
                 else
                 {
-                    @ViewBag.NotificationErr = "Llave no proporcionada";
-                    return View("Index", DL.UserDL.GetUsuarioList());
+                    return Json(new { success = false, responseText = "Llave no proporcionada" }, JsonRequestBehavior.AllowGet);
                 }
 
-                @ViewBag.Notification = "Usuario eliminado correctamente";
-                return View("Index", DL.UserDL.GetUsuarioList());
+                return Json(new { success = true, responseText = "Registro eliminado correctamente" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
-                @ViewBag.NotificationErr = "Error: " + ex.Message;
                 log.Error(ex);
-                return View("Index", DL.UserDL.GetUsuarioList());
+                return Json(new { success = false, responseText = "Error no controlado" }, JsonRequestBehavior.AllowGet);
             }
         }
 
